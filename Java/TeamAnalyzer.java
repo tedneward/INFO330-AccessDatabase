@@ -17,14 +17,18 @@ public class TeamAnalyzer {
 
         // This bit of JDBC magic I provide as a free gift :-)
         // The rest is up to you.
-        try (Connection con = DriverManager.getConnection("jdbc:sqlite:pokemon.db")) {
+        try (Connection con =
+        DriverManager.getConnection("jdbc:sqlite:~/Documents/info330/INFO330-AccessingDatabases/pokemon.sqlite")) {
             for (String arg : args) {
+                print("Hello");
                 print("Analyzing " + arg);
-                
+                print(type); 
                 //check effectivness against each type
                 for(String type : types) {
+                    System.out.println(type);
                     //create query 
-                    String query = "SELECT against_" + type + " FROM pokemon "
+                    String query = "SELECT against_" + type + " FROM
+                    imported_pokemon_data "
                         + "WHERE pokedex_number = " + arg;
                     //execute query
                     Statement exec_query = con.createStatement();
