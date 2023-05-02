@@ -20,8 +20,40 @@ public class TeamAnalyzer {
         try (Connection con = DriverManager.getConnection("jdbc:sqlite:pokemon.db")) {
             for (String arg : args) {
                 print("Analyzing " + arg);
+                
+                //check effectivness against each type
+                for(String type : types) {
+                    //create query 
+                    String query = "SELECT against_" + type + " FROM pokemon "
+                        + "WHERE pokedex_number = " + arg;
+                    //execute query
+                    Statement exec_query = con.createStatement();
+
+                    //effectivness against type pokemon
+                    ResultSet effect = exec_query.executeQuery(query);
+
+                    //check the effectivness
+                    if(effect.next()){
+                        double effectivness = effect.getDouble(1);
+                        //is effective
+                        if(effectivness > 1) {
+                            System.out.println("The pokemon is strong against "
+                                + type + "!");
+                        }
+                        else if (effectivness < 1) {
+                            System.out.println("The pokemon is weak against "
+                                + type + "!");
+                        }
+                        else {
+                            System.out.println("The pokemon is neutral against "
+                                + type + "!");
+                        }
+                    }
+                }
+            }
 
                 // Analyze the pokemon whose pokedex_number is in "arg"
+
 
                 // You will need to write the SQL, extract the results, and compare
                 // Remember to look at those "against_NNN" column values; greater than 1
