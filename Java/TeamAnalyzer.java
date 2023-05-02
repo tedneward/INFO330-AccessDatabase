@@ -50,7 +50,7 @@ public class TeamAnalyzer {
                         }
                     }
                 }
-            }
+        
 
                 // Analyze the pokemon whose pokedex_number is in "arg"
 
