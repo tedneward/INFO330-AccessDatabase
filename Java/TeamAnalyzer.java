@@ -17,11 +17,17 @@ public class TeamAnalyzer {
 
         // This bit of JDBC magic I provide as a free gift :-)
         // The rest is up to you.
-        try (Connection con = DriverManager.getConnection("jdbc:sqlite:pokemon.db")) {
+        try (Connection con = DriverManager.getConnection("jdbc:sqlite:../pokemon.sqlite")) {
             for (String arg : args) {
                 print("Analyzing " + arg);
 
                 // Analyze the pokemon whose pokedex_number is in "arg"
+                try(Statement statement = con.createStatement()) {
+                    try(ResultSet results = statement.executeQuery("SELECT * FROM pokemon")) {
+                        while(results.next()) {
+                        }
+                    }
+                }
 
                 // You will need to write the SQL, extract the results, and compare
                 // Remember to look at those "against_NNN" column values; greater than 1
